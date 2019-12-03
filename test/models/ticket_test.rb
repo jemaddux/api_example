@@ -25,4 +25,16 @@ class TicketTest < ActiveSupport::TestCase
     ticket.add_tag("three")
     assert ticket.tags.count == 3, "count is wrong"
   end
+
+  test 'cannot have more than 5 tags' do
+    ticket = Ticket.create(user_id: 3, title: 'many tags?')
+    ticket.add_tag("one")
+    ticket.add_tag("two")
+    ticket.add_tag("three")
+    ticket.add_tag("four")
+    ticket.add_tag("five")
+    ticket.add_tag("six")
+    ticket.add_tag("seven")
+    assert ticket.tags.count == 5, "count is wrong"
+  end
 end

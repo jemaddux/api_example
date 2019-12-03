@@ -6,6 +6,7 @@ class Ticket < ApplicationRecord
   validates :title, presence: true 
 
   def add_tag(tag_name)
+    return if self.tags.count >= 5
     tag = Tag.find_or_create_by(name: tag_name)
     tag.save
     ticket_tag = TicketTag.find_or_create_by(ticket_id: self.id, tag_id: tag.id)
