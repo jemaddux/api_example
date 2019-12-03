@@ -17,4 +17,12 @@ class TicketTest < ActiveSupport::TestCase
     refute ticket.valid?, 'ticket is not valid without a title'
     assert_not_nil ticket.errors[:title], 'no validation error for title present'
   end
+
+  test 'has many tags' do
+    ticket = Ticket.create(user_id: 2, title: 'title here')
+    ticket.add_tag("one")
+    ticket.add_tag("two")
+    ticket.add_tag("three")
+    assert ticket.tags.count == 3, "count is wrong"
+  end
 end
