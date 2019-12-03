@@ -3,9 +3,9 @@ class TicketsController < ApplicationController
     @form = TicketApi.new(form_params)
 
     if @form.save
-      
+      render status: 200
     else
-      
+      render status: 422, json: { errors: [ @form.errors ] }
     end
   end
 

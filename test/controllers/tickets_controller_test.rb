@@ -7,4 +7,11 @@ class TicketsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert Ticket.count == ticket_count + 1
   end
+
+  test 'invalid create' do
+    ticket_count = Ticket.count
+    post '/tickets/create', params: { "title" => "hmmmm"}
+    assert_response 422
+    assert Ticket.count == ticket_count
+  end
 end
